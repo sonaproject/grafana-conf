@@ -35,6 +35,12 @@
       "version": "5.0.0"
     },
     {
+      "type": "panel",
+      "id": "heatmap",
+      "name": "Heatmap",
+      "version": "5.0.0"
+    },
+    {
       "type": "datasource",
       "id": "influxdb",
       "name": "InfluxDB",
@@ -67,6 +73,144 @@
   "links": [],
   "panels": [
     {
+      "bgColor": "#1f78c1",
+      "clockType": "24 hour",
+      "countdownSettings": {
+        "customFormat": null,
+        "endCountdownTime": "2018-07-28T13:30:00.000Z",
+        "endText": "00:00:00"
+      },
+      "dateSettings": {
+        "dateFormat": "YYYY-MM-DD",
+        "fontSize": "20px",
+        "fontWeight": "normal",
+        "showDate": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 17,
+      "links": [],
+      "mode": "time",
+      "offsetFromUtc": null,
+      "offsetFromUtcMinutes": null,
+      "timeSettings": {
+        "customFormat": "HH:mm:ss",
+        "fontSize": "60px",
+        "fontWeight": "bold"
+      },
+      "title": "",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#614d93", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": null,
+      "format": "ms",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 18,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "count",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "sonaflow",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT last(\"startupTime\") - first(\"startupTime\") FROM \"sonaflow\"",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["startupTime"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
+    {
       "cacheTimeout": null,
       "colorBackground": true,
       "colorValue": false,
@@ -83,7 +227,7 @@
       "gridPos": {
         "h": 4,
         "w": 6,
-        "x": 0,
+        "x": 12,
         "y": 0
       },
       "id": 14,
@@ -160,7 +304,7 @@
       "title": "",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "100%",
+      "valueFontSize": "170%",
       "valueMaps": [
         {
           "op": "=",
@@ -187,7 +331,7 @@
       "gridPos": {
         "h": 4,
         "w": 6,
-        "x": 6,
+        "x": 18,
         "y": 0
       },
       "id": 15,
@@ -263,7 +407,7 @@
       "title": "",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "100%",
+      "valueFontSize": "170%",
       "valueMaps": [
         {
           "op": "=",
@@ -272,39 +416,6 @@
         }
       ],
       "valueName": "avg"
-    },
-    {
-      "bgColor": "#1f78c1",
-      "clockType": "24 hour",
-      "countdownSettings": {
-        "customFormat": null,
-        "endCountdownTime": "2018-07-28T13:30:00.000Z",
-        "endText": "00:00:00"
-      },
-      "dateSettings": {
-        "dateFormat": "YYYY-MM-DD",
-        "fontSize": "20px",
-        "fontWeight": "normal",
-        "showDate": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 11,
-        "x": 12,
-        "y": 0
-      },
-      "id": 17,
-      "links": [],
-      "mode": "time",
-      "offsetFromUtc": null,
-      "offsetFromUtcMinutes": null,
-      "timeSettings": {
-        "customFormat": "HH:mm:ss",
-        "fontSize": "60px",
-        "fontWeight": "bold"
-      },
-      "title": "",
-      "type": "grafana-clock-panel"
     },
     {
       "aliasColors": {},
@@ -328,6 +439,8 @@
       "legend": {
         "percentage": true,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "values": true
       },
       "legendType": "Right side",
@@ -399,6 +512,8 @@
         "percentage": true,
         "show": true,
         "sideWidth": null,
+        "sort": "current",
+        "sortDesc": true,
         "values": true
       },
       "legendType": "Right side",
@@ -486,17 +601,217 @@
       "datasource": "${DS_INFLUXDB}",
       "fill": 5,
       "gridPos": {
-        "h": 9,
-        "w": 23,
+        "h": 8,
+        "w": 12,
         "x": 0,
         "y": 13
       },
-      "id": 6,
+      "id": 24,
       "legend": {
+        "alignAsTable": false,
         "avg": false,
         "current": false,
         "max": false,
         "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": true,
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), deviceId fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Traffic of Each Switch",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": "Bytes/s",
+          "logBase": 10,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateSpectral",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_INFLUXDB}",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "heatmap": {},
+      "highlightCards": true,
+      "id": 23,
+      "legend": {
+        "show": false
+      },
+      "links": [],
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE $timeFilter GROUP BY time(5s), srcIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Traffic Heat Map",
+      "tooltip": {
+        "show": true,
+        "showHistogram": true
+      },
+      "transparent": true,
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "Bps",
+        "logBase": 10,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_INFLUXDB}",
+      "fill": 5,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 6,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": false
@@ -550,7 +865,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Ingress Traffic of VM Port (Bytes)",
+      "title": "Ingress Traffic for Each VM Port",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -568,7 +883,7 @@
       "yaxes": [
         {
           "format": "Bps",
-          "label": null,
+          "label": "Bytes/s",
           "logBase": 10,
           "max": null,
           "min": null,
@@ -597,9 +912,9 @@
       "fill": 5,
       "gridPos": {
         "h": 9,
-        "w": 23,
+        "w": 24,
         "x": 0,
-        "y": 22
+        "y": 30
       },
       "id": 4,
       "legend": {
@@ -661,7 +976,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Egress Traffic of VM Port (Bytes)",
+      "title": "Egress Traffic for Each VM Port",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -679,7 +994,7 @@
       "yaxes": [
         {
           "format": "Bps",
-          "label": null,
+          "label": "Bytes/s",
           "logBase": 10,
           "max": null,
           "min": null,
@@ -708,9 +1023,9 @@
       "fill": 5,
       "gridPos": {
         "h": 9,
-        "w": 23,
+        "w": 24,
         "x": 0,
-        "y": 31
+        "y": 39
       },
       "id": 11,
       "legend": {
@@ -771,7 +1086,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Ingress Traffic of VM Port (Packets)",
+      "title": "Ingress Traffic for Each VM Port",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -789,7 +1104,7 @@
       "yaxes": [
         {
           "format": "pps",
-          "label": null,
+          "label": "Packets/s",
           "logBase": 10,
           "max": null,
           "min": null,
@@ -818,9 +1133,9 @@
       "fill": 5,
       "gridPos": {
         "h": 9,
-        "w": 23,
+        "w": 24,
         "x": 0,
-        "y": 40
+        "y": 48
       },
       "id": 12,
       "legend": {
@@ -881,7 +1196,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Egress Traffic of VM Port (Packets)",
+      "title": "Egress Traffic for Each VM Port",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -899,7 +1214,7 @@
       "yaxes": [
         {
           "format": "pps",
-          "label": null,
+          "label": "Packets/s",
           "logBase": 10,
           "max": null,
           "min": null,
@@ -929,9 +1244,9 @@
       "fill": 1,
       "gridPos": {
         "h": 10,
-        "w": 23,
+        "w": 24,
         "x": 0,
-        "y": 49
+        "y": 57
       },
       "id": 2,
       "interval": "5s",
@@ -1069,5 +1384,5 @@
   "timezone": "",
   "title": "Openstack Telemetry",
   "uid": "17k5SQdmz",
-  "version": 37
+  "version": 60
 }
