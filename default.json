@@ -1,17 +1,26 @@
 {
-  "__inputs": [{
-    "name": "DS_INFLUXDB",
-    "label": "influxdb",
-    "description": "",
-    "type": "datasource",
-    "pluginId": "influxdb",
-    "pluginName": "InfluxDB"
-  }],
-  "__requires": [{
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB",
+      "label": "influxdb",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
       "version": "5.2.2"
+    },
+    {
+      "type": "panel",
+      "id": "grafana-clock-panel",
+      "name": "Clock",
+      "version": "0.1.0"
     },
     {
       "type": "panel",
@@ -30,25 +39,274 @@
       "id": "influxdb",
       "name": "InfluxDB",
       "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": "5.0.0"
     }
   ],
   "annotations": {
-    "list": [{
-      "builtIn": 1,
-      "datasource": "-- Grafana --",
-      "enable": true,
-      "hide": true,
-      "iconColor": "rgba(0, 211, 255, 1)",
-      "name": "Annotations & Alerts",
-      "type": "dashboard"
-    }]
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
   },
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
   "links": [],
-  "panels": [{
+  "panels": [
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#ef843c", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "Number of Switches",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "count",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SHOW TAG VALUES EXACT CARDINALITY FROM \"sonaflow\" WITH KEY = \"deviceId\" ",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#ef843c", "#629e51", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 15,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "Number of VMs",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "count",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SHOW TAG VALUES EXACT CARDINALITY FROM \"sonaflow\" WITH KEY = \"srcIp\" ",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "bgColor": "#1f78c1",
+      "clockType": "24 hour",
+      "countdownSettings": {
+        "customFormat": null,
+        "endCountdownTime": "2018-07-28T13:30:00.000Z",
+        "endText": "00:00:00"
+      },
+      "dateSettings": {
+        "dateFormat": "YYYY-MM-DD",
+        "fontSize": "20px",
+        "fontWeight": "normal",
+        "showDate": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 11,
+        "x": 12,
+        "y": 0
+      },
+      "id": 17,
+      "links": [],
+      "mode": "time",
+      "offsetFromUtc": null,
+      "offsetFromUtcMinutes": null,
+      "timeSettings": {
+        "customFormat": "HH:mm:ss",
+        "fontSize": "60px",
+        "fontWeight": "bold"
+      },
+      "title": "",
+      "type": "grafana-clock-panel"
+    },
+    {
       "aliasColors": {},
       "breakPoint": "50%",
       "cacheTimeout": null,
@@ -63,7 +321,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 4
       },
       "id": 10,
       "interval": null,
@@ -77,42 +335,41 @@
       "maxDataPoints": 3,
       "nullPointMode": "connected",
       "pieType": "pie",
-      "strokeWidth": 1,
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT last(\"currAccBytes\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "strokeWidth": "5",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT last(\"currAccBytes\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "title": "Portion of Accumulated Ingress Traffic",
       "transparent": true,
       "type": "grafana-piechart-panel",
@@ -133,7 +390,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 4
       },
       "hideTimeOverride": false,
       "id": 8,
@@ -149,33 +406,31 @@
       "maxDataPoints": 3,
       "nullPointMode": "connected",
       "pieType": "pie",
-      "strokeWidth": 1,
-      "targets": [{
+      "strokeWidth": "5",
+      "targets": [
+        {
           "alias": "",
-          "groupBy": [{
-              "params": [
-                "$__interval"
-              ],
+          "groupBy": [
+            {
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"currAccBytes\")  FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
+          "query":
+            "SELECT last(\"currAccBytes\")  FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
-            [{
-                "params": [
-                  "value"
-                ],
+            [
+              {
+                "params": ["value"],
                 "type": "field"
               },
               {
@@ -187,16 +442,13 @@
           "tags": []
         },
         {
-          "groupBy": [{
-              "params": [
-                "$__interval"
-              ],
+          "groupBy": [
+            {
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -205,10 +457,9 @@
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
-            [{
-                "params": [
-                  "value"
-                ],
+            [
+              {
+                "params": ["value"],
                 "type": "field"
               },
               {
@@ -238,7 +489,7 @@
         "h": 9,
         "w": 23,
         "x": 0,
-        "y": 9
+        "y": 13
       },
       "id": 6,
       "legend": {
@@ -262,41 +513,40 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": true,
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
@@ -315,7 +565,8 @@
         "show": true,
         "values": []
       },
-      "yaxes": [{
+      "yaxes": [
+        {
           "format": "Bps",
           "label": null,
           "logBase": 10,
@@ -348,7 +599,7 @@
         "h": 9,
         "w": 23,
         "x": 0,
-        "y": 18
+        "y": 22
       },
       "id": 4,
       "legend": {
@@ -372,42 +623,41 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": true,
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "hide": false,
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "hide": false,
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
@@ -426,7 +676,8 @@
         "show": true,
         "values": []
       },
-      "yaxes": [{
+      "yaxes": [
+        {
           "format": "Bps",
           "label": null,
           "logBase": 10,
@@ -459,7 +710,7 @@
         "h": 9,
         "w": 23,
         "x": 0,
-        "y": 27
+        "y": 31
       },
       "id": 11,
       "legend": {
@@ -483,41 +734,40 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": true,
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
@@ -536,7 +786,8 @@
         "show": true,
         "values": []
       },
-      "yaxes": [{
+      "yaxes": [
+        {
           "format": "pps",
           "label": null,
           "logBase": 10,
@@ -569,7 +820,7 @@
         "h": 9,
         "w": 23,
         "x": 0,
-        "y": 36
+        "y": 40
       },
       "id": 12,
       "legend": {
@@ -593,41 +844,40 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": true,
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
@@ -646,7 +896,8 @@
         "show": true,
         "values": []
       },
-      "yaxes": [{
+      "yaxes": [
+        {
           "format": "pps",
           "label": null,
           "logBase": 10,
@@ -680,7 +931,7 @@
         "h": 10,
         "w": 23,
         "x": 0,
-        "y": 45
+        "y": 49
       },
       "id": 2,
       "interval": "5s",
@@ -699,9 +950,11 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [{
-        "type": "dashboard"
-      }],
+      "links": [
+        {
+          "type": "dashboard"
+        }
+      ],
       "nullPointMode": "null",
       "percentage": false,
       "pointradius": 5,
@@ -711,41 +964,40 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (srcIp != '0.0.0.0/32' and dstIp != '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp, dstIp, srcPort, dstPort fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (srcIp != '0.0.0.0/32' and dstIp != '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp, dstIp, srcPort, dstPort fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
@@ -764,7 +1016,8 @@
         "show": true,
         "values": []
       },
-      "yaxes": [{
+      "yaxes": [
+        {
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -811,20 +1064,10 @@
       "2h",
       "1d"
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
   "title": "Openstack Telemetry",
   "uid": "17k5SQdmz",
-  "version": 24
+  "version": 37
 }
