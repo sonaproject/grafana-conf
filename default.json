@@ -109,9 +109,9 @@
       "cacheTimeout": null,
       "colorBackground": true,
       "colorValue": false,
-      "colors": ["#299c46", "#614d93", "#d44a3a"],
+      "colors": ["#299c46", "#508642", "#d44a3a"],
       "datasource": "${DS_INFLUXDB}",
-      "decimals": null,
+      "decimals": 0,
       "format": "ms",
       "gauge": {
         "maxValue": 100,
@@ -214,7 +214,7 @@
       "cacheTimeout": null,
       "colorBackground": true,
       "colorValue": false,
-      "colors": ["#299c46", "#ef843c", "#d44a3a"],
+      "colors": ["#299c46", "#e24d42", "#d44a3a"],
       "datasource": "${DS_INFLUXDB}",
       "format": "none",
       "gauge": {
@@ -229,6 +229,210 @@
         "w": 6,
         "x": 12,
         "y": 0
+      },
+      "id": 27,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "Drop Pkts",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "last",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"dropPkts\") FROM \"sonaflow\"",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "170%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#e24d42", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 31,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "Error Pkts",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "last",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"errorPkts\") FROM \"sonaflow\"",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "170%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#c15c17", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 4
       },
       "id": 14,
       "interval": null,
@@ -249,7 +453,7 @@
       "nullText": null,
       "postfix": "",
       "postfixFontSize": "50%",
-      "prefix": "Number of Switches",
+      "prefix": "# of Switches",
       "prefixFontSize": "50%",
       "rangeMaps": [
         {
@@ -318,7 +522,333 @@
       "cacheTimeout": null,
       "colorBackground": true,
       "colorValue": false,
-      "colors": ["#ef843c", "#629e51", "#d44a3a"],
+      "colors": ["#299c46", "#3f2b5b", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 0,
+      "format": "decbytes",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 4
+      },
+      "id": 25,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "sum",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "sonaflow",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccBytes\") as deviceIngress FROM \"sonaflow\" GROUP BY deviceId fill(null))",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["currAccBytes"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "integral"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dstIp",
+              "operator": "=",
+              "value": "0.0.0.0/32"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "title": "Total Traffic (Bytes)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#052b51", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 0,
+      "format": "decbytes",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 4
+      },
+      "id": 32,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "sum",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "sonaflow",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccBytes\") as deviceIngress FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["currAccBytes"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "integral"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dstIp",
+              "operator": "=",
+              "value": "0.0.0.0/32"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "title": "Ingress Traffic (Bytes)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#58140c", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 0,
+      "format": "decbytes",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 4
+      },
+      "id": 26,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "count",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"deviceEgress\") FROM (SELECT last(\"currAccBytes\") as deviceEgress FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "Egress Traffic (Bytes)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#ef843c", "#ef843c", "#d44a3a"],
       "datasource": "${DS_INFLUXDB}",
       "format": "none",
       "gauge": {
@@ -331,8 +861,8 @@
       "gridPos": {
         "h": 4,
         "w": 6,
-        "x": 18,
-        "y": 0
+        "x": 0,
+        "y": 8
       },
       "id": 15,
       "interval": null,
@@ -353,7 +883,7 @@
       "nullText": null,
       "postfix": "",
       "postfixFontSize": "50%",
-      "prefix": "Number of VMs",
+      "prefix": "# of VMs",
       "prefixFontSize": "50%",
       "rangeMaps": [
         {
@@ -418,6 +948,332 @@
       "valueName": "avg"
     },
     {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#614d93", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 0,
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 8
+      },
+      "id": 33,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "sum",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "sonaflow",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccPkts\") as deviceIngress FROM \"sonaflow\" GROUP BY deviceId fill(null))",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["currAccBytes"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "integral"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dstIp",
+              "operator": "=",
+              "value": "0.0.0.0/32"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "title": "Total Traffic (Packets)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#0a437c", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 0,
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "id": 34,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "sum",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "sonaflow",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccPkts\") as deviceIngress FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": ["currAccBytes"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "integral"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dstIp",
+              "operator": "=",
+              "value": "0.0.0.0/32"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "title": "Ingress Traffic",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": ["#299c46", "#890f02", "#d44a3a"],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 0,
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "id": 35,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "count",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"deviceEgress\") FROM (SELECT last(\"currAccPkts\") as deviceEgress FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "Egress Traffic",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
       "aliasColors": {},
       "breakPoint": "50%",
       "cacheTimeout": null,
@@ -432,7 +1288,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 4
+        "y": 12
       },
       "id": 10,
       "interval": null,
@@ -447,10 +1303,11 @@
       "links": [],
       "maxDataPoints": 3,
       "nullPointMode": "connected",
-      "pieType": "pie",
+      "pieType": "donut",
       "strokeWidth": "5",
       "targets": [
         {
+          "alias": "$tag_srcIp",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -483,7 +1340,7 @@
           "tags": []
         }
       ],
-      "title": "Portion of Accumulated Ingress Traffic",
+      "title": "Total Ingress Traffic by VM",
       "transparent": true,
       "type": "grafana-piechart-panel",
       "valueName": "current"
@@ -503,7 +1360,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 4
+        "y": 12
       },
       "hideTimeOverride": false,
       "id": 8,
@@ -520,11 +1377,11 @@
       "links": [],
       "maxDataPoints": 3,
       "nullPointMode": "connected",
-      "pieType": "pie",
+      "pieType": "donut",
       "strokeWidth": "5",
       "targets": [
         {
-          "alias": "",
+          "alias": "$tag_dstIp",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -555,8 +1412,50 @@
             ]
           ],
           "tags": []
-        },
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Egress Traffic by VM",
+      "transparent": true,
+      "type": "grafana-piechart-panel",
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "${DS_INFLUXDB}",
+      "fontSize": "80%",
+      "format": "decbytes",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 21
+      },
+      "id": 29,
+      "interval": null,
+      "legend": {
+        "percentage": true,
+        "show": true,
+        "sort": "current",
+        "sortDesc": true,
+        "values": false
+      },
+      "legendType": "Right side",
+      "links": [],
+      "maxDataPoints": 3,
+      "nullPointMode": "connected",
+      "pieType": "donut",
+      "strokeWidth": "5",
+      "targets": [
         {
+          "alias": "$tag_deviceId",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -569,7 +1468,84 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "B",
+          "query":
+            "SELECT last(\"currAccBytes\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') GROUP BY deviceId fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Total Ingress Traffic by Device",
+      "transparent": true,
+      "type": "grafana-piechart-panel",
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "25%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "${DS_INFLUXDB}",
+      "fontSize": "80%",
+      "format": "decbytes",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 21
+      },
+      "hideTimeOverride": false,
+      "id": 30,
+      "interval": null,
+      "legend": {
+        "percentage": true,
+        "show": true,
+        "sideWidth": null,
+        "sort": "current",
+        "sortDesc": true,
+        "values": false
+      },
+      "legendType": "Right side",
+      "links": [],
+      "maxDataPoints": 3,
+      "nullPointMode": "connected",
+      "pieType": "donut",
+      "strokeWidth": "5",
+      "targets": [
+        {
+          "alias": "$tag_deviceId",
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT last(\"currAccBytes\") FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') GROUP BY deviceId fill(null)",
+          "rawQuery": true,
+          "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
@@ -588,7 +1564,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Portion of Accumulated Egress Traffic",
+      "title": "Total Egress Traffic by Device",
       "transparent": true,
       "type": "grafana-piechart-panel",
       "valueName": "current"
@@ -604,7 +1580,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 13
+        "y": 30
       },
       "id": 24,
       "legend": {
@@ -632,6 +1608,7 @@
       "steppedLine": true,
       "targets": [
         {
+          "alias": "$tag_deviceId",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -723,7 +1700,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 13
+        "y": 30
       },
       "heatmap": {},
       "highlightCards": true,
@@ -802,7 +1779,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 38
       },
       "id": 6,
       "legend": {
@@ -830,6 +1807,7 @@
       "steppedLine": true,
       "targets": [
         {
+          "alias": "$tag_srcIp",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -914,7 +1892,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 47
       },
       "id": 4,
       "legend": {
@@ -940,6 +1918,7 @@
       "steppedLine": true,
       "targets": [
         {
+          "alias": "$tag_dstIp",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -1025,7 +2004,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 56
       },
       "id": 11,
       "legend": {
@@ -1051,6 +2030,7 @@
       "steppedLine": true,
       "targets": [
         {
+          "alias": "$tag_srcIp",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -1135,7 +2115,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 65
       },
       "id": 12,
       "legend": {
@@ -1161,6 +2141,7 @@
       "steppedLine": true,
       "targets": [
         {
+          "alias": "$tag_dstIp",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -1246,7 +2227,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 74
       },
       "id": 2,
       "interval": "5s",
@@ -1384,5 +2365,5 @@
   "timezone": "",
   "title": "Openstack Telemetry",
   "uid": "17k5SQdmz",
-  "version": 61
+  "version": 131
 }
