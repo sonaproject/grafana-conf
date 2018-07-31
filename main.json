@@ -468,46 +468,7 @@
         "show": false
       },
       "tableColumn": "sum",
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "measurement": "sonaflow",
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccBytes\") as deviceIngress FROM \"sonaflow\" GROUP BY deviceId fill(null))",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "table",
-        "select": [
-          [{
-              "params": [
-                "currAccBytes"
-              ],
-              "type": "field"
-            },
-            {
-              "params": [],
-              "type": "integral"
-            }
-          ]
-        ],
-        "tags": [{
-          "key": "dstIp",
-          "operator": "=",
-          "value": "0.0.0.0/32"
-        }]
-      }],
+      "targets": [],
       "thresholds": "",
       "title": "Total Traffic (Bytes)",
       "transparent": true,
@@ -547,7 +508,12 @@
       },
       "id": 32,
       "interval": null,
-      "links": [],
+      "links": [{
+        "dashUri": "db/ingress-traffic-stats-bytes",
+        "dashboard": "Ingress Traffic Stats (Bytes)",
+        "title": "Ingress Traffic Stats (Bytes)",
+        "type": "dashboard"
+      }],
       "mappingType": 1,
       "mappingTypes": [{
           "name": "value to text",
@@ -594,7 +560,7 @@
         "measurement": "sonaflow",
         "orderByTime": "ASC",
         "policy": "default",
-        "query": "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccBytes\") as deviceIngress FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+        "query": "SELECT sum(\"vmIngress\") FROM (SELECT last(\"currAccBytes\") as vmIngress FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') GROUP BY srcIp fill(null))",
         "rawQuery": true,
         "refId": "A",
         "resultFormat": "table",
@@ -656,7 +622,12 @@
       },
       "id": 26,
       "interval": null,
-      "links": [],
+      "links": [{
+        "dashUri": "db/egress-traffic-stats-bytes",
+        "dashboard": "Egress Traffic Stats (Bytes)",
+        "title": "Egress Traffic Stats (Bytes)",
+        "type": "dashboard"
+      }],
       "mappingType": 1,
       "mappingTypes": [{
           "name": "value to text",
@@ -702,7 +673,7 @@
         ],
         "orderByTime": "ASC",
         "policy": "default",
-        "query": "SELECT sum(\"deviceEgress\") FROM (SELECT last(\"currAccBytes\") as deviceEgress FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+        "query": "SELECT sum(\"vmEgress\") FROM (SELECT last(\"currAccBytes\") as vmEgress FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') GROUP BY dstIp fill(null))",
         "rawQuery": true,
         "refId": "A",
         "resultFormat": "time_series",
@@ -893,46 +864,7 @@
         "show": false
       },
       "tableColumn": "sum",
-      "targets": [{
-        "groupBy": [{
-            "params": [
-              "$interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "measurement": "sonaflow",
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccPkts\") as deviceIngress FROM \"sonaflow\" GROUP BY deviceId fill(null))",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "table",
-        "select": [
-          [{
-              "params": [
-                "currAccBytes"
-              ],
-              "type": "field"
-            },
-            {
-              "params": [],
-              "type": "integral"
-            }
-          ]
-        ],
-        "tags": [{
-          "key": "dstIp",
-          "operator": "=",
-          "value": "0.0.0.0/32"
-        }]
-      }],
+      "targets": [],
       "thresholds": "",
       "title": "Total Traffic (Packets)",
       "transparent": true,
@@ -972,7 +904,12 @@
       },
       "id": 34,
       "interval": null,
-      "links": [],
+      "links": [{
+        "dashUri": "db/ingress-traffic-stats-packets",
+        "dashboard": "Ingress Traffic Stats (Packets)",
+        "title": "Ingress Traffic Stats (Packets)",
+        "type": "dashboard"
+      }],
       "mappingType": 1,
       "mappingTypes": [{
           "name": "value to text",
@@ -1019,7 +956,7 @@
         "measurement": "sonaflow",
         "orderByTime": "ASC",
         "policy": "default",
-        "query": "SELECT sum(\"deviceIngress\") FROM (SELECT last(\"currAccPkts\") as deviceIngress FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+        "query": "SELECT sum(\"vmIngress\") FROM (SELECT last(\"currAccPkts\") as vmIngress FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') GROUP BY srcIp fill(null))",
         "rawQuery": true,
         "refId": "A",
         "resultFormat": "table",
@@ -1081,7 +1018,12 @@
       },
       "id": 35,
       "interval": null,
-      "links": [],
+      "links": [{
+        "dashUri": "db/egress-traffic-stats-packets",
+        "dashboard": "Egress Traffic Stats (Packets)",
+        "title": "Egress Traffic Stats (Packets)",
+        "type": "dashboard"
+      }],
       "mappingType": 1,
       "mappingTypes": [{
           "name": "value to text",
@@ -1127,7 +1069,7 @@
         ],
         "orderByTime": "ASC",
         "policy": "default",
-        "query": "SELECT sum(\"deviceEgress\") FROM (SELECT last(\"currAccPkts\") as deviceEgress FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') GROUP BY deviceId fill(null))",
+        "query": "SELECT sum(\"vmEgress\") FROM (SELECT last(\"currAccPkts\") as vmEgress FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') GROUP BY dstIp fill(null))",
         "rawQuery": true,
         "refId": "A",
         "resultFormat": "time_series",
@@ -1919,5 +1861,5 @@
   "timezone": "",
   "title": "Openstack Telemetry",
   "uid": "17k5SQdmz",
-  "version": 136
+  "version": 149
 }

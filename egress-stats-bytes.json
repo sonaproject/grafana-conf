@@ -24,6 +24,12 @@
       "id": "influxdb",
       "name": "InfluxDB",
       "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": "5.0.0"
     }
   ],
   "annotations": {
@@ -56,119 +62,6 @@
         "y": 0
       },
       "id": 2,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": true,
-      "targets": [{
-        "alias": "$tag_srcIp",
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
-            },
-            {
-              "params": [],
-              "type": "mean"
-            }
-          ]
-        ],
-        "tags": []
-      }],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Ingress Traffic for Each VM Port",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [{
-          "format": "Bps",
-          "label": "Bytes/s",
-          "logBase": 10,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_INFLUXDB}",
-      "fill": 5,
-      "gridPos": {
-        "h": 9,
-        "w": 24,
-        "x": 0,
-        "y": 9
-      },
-      "id": 4,
       "legend": {
         "avg": false,
         "current": false,
@@ -266,9 +159,105 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "columns": [{
+          "text": "Current",
+          "value": "current"
+        },
+        {
+          "text": "Min",
+          "value": "min"
+        },
+        {
+          "text": "Max",
+          "value": "max"
+        },
+        {
+          "text": "Total",
+          "value": "total"
+        }
+      ],
+      "datasource": "${DS_INFLUXDB}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [{
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "link": false,
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [{
+        "alias": "$tag_dstIp",
+        "groupBy": [{
+            "params": [
+              "$__interval"
+            ],
+            "type": "time"
+          },
+          {
+            "params": [
+              "null"
+            ],
+            "type": "fill"
+          }
+        ],
+        "orderByTime": "ASC",
+        "policy": "default",
+        "query": "SELECT sum(\"currAccBytes\")  - sum(\"prevAccBytes\") FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
+        "rawQuery": true,
+        "refId": "A",
+        "resultFormat": "time_series",
+        "select": [
+          [{
+              "params": [
+                "value"
+              ],
+              "type": "field"
+            },
+            {
+              "params": [],
+              "type": "mean"
+            }
+          ]
+        ],
+        "tags": []
+      }],
+      "title": "Egress Traffic Table View",
+      "transform": "timeseries_aggregations",
+      "type": "table"
     }
   ],
-  "refresh": "5s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -276,7 +265,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -305,7 +294,7 @@
     ]
   },
   "timezone": "",
-  "title": "Traffic Statistics (Bytes)",
-  "uid": "B3s8msKik",
-  "version": 2
+  "title": "Egress Traffic Stats (Bytes)",
+  "uid": "AsNYkUKmk",
+  "version": 6
 }

@@ -24,6 +24,12 @@
       "id": "influxdb",
       "name": "InfluxDB",
       "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": "5.0.0"
     }
   ],
   "annotations": {
@@ -154,42 +160,64 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
+      "columns": [{
+          "text": "Current",
+          "value": "current"
+        },
+        {
+          "text": "Min",
+          "value": "min"
+        },
+        {
+          "text": "Max",
+          "value": "max"
+        },
+        {
+          "text": "Total",
+          "value": "total"
+        }
+      ],
       "datasource": "${DS_INFLUXDB}",
-      "fill": 5,
+      "fontSize": "100%",
       "gridPos": {
-        "h": 9,
+        "h": 11,
         "w": 24,
         "x": 0,
         "y": 9
       },
       "id": 4,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": true,
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [{
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "link": false,
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
       "targets": [{
-        "alias": "$tag_dstIp",
+        "alias": "$tag_srcIp",
         "groupBy": [{
             "params": [
               "$__interval"
@@ -205,7 +233,7 @@
         ],
         "orderByTime": "ASC",
         "policy": "default",
-        "query": "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (srcIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), dstIp fill(null)",
+        "query": "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
         "rawQuery": true,
         "refId": "A",
         "resultFormat": "time_series",
@@ -224,45 +252,9 @@
         ],
         "tags": []
       }],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Egress Traffic for Each VM Port",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [{
-          "format": "pps",
-          "label": "Packets/s",
-          "logBase": 10,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Ingress Traffic Table View",
+      "transform": "timeseries_aggregations",
+      "type": "table"
     }
   ],
   "refresh": "5s",
@@ -302,7 +294,7 @@
     ]
   },
   "timezone": "",
-  "title": "Traffic Statistics (Packets)",
+  "title": "Ingress Traffic Stats (Packets)",
   "uid": "xRjZZsKmz",
-  "version": 1
+  "version": 4
 }
