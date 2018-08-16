@@ -1,13 +1,16 @@
 {
-  "__inputs": [{
-    "name": "DS_INFLUXDB",
-    "label": "influxdb",
-    "description": "",
-    "type": "datasource",
-    "pluginId": "influxdb",
-    "pluginName": "InfluxDB"
-  }],
-  "__requires": [{
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB",
+      "label": "influxdb",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -33,22 +36,25 @@
     }
   ],
   "annotations": {
-    "list": [{
-      "builtIn": 1,
-      "datasource": "-- Grafana --",
-      "enable": true,
-      "hide": true,
-      "iconColor": "rgba(0, 211, 255, 1)",
-      "name": "Annotations & Alerts",
-      "type": "dashboard"
-    }]
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
   },
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
   "links": [],
-  "panels": [{
+  "panels": [
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -83,42 +89,41 @@
       "spaceLength": 10,
       "stack": false,
       "steppedLine": true,
-      "targets": [{
-        "alias": "$tag_srcIp",
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "targets": [
+        {
+          "alias": "$tag_srcIp",
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time($__interval), srcIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
@@ -137,7 +142,8 @@
         "show": true,
         "values": []
       },
-      "yaxes": [{
+      "yaxes": [
+        {
           "format": "pps",
           "label": "Packets/s",
           "logBase": 10,
@@ -160,7 +166,8 @@
       }
     },
     {
-      "columns": [{
+      "columns": [
+        {
           "text": "Current",
           "value": "current"
         },
@@ -194,7 +201,8 @@
         "col": 0,
         "desc": true
       },
-      "styles": [{
+      "styles": [
+        {
           "alias": "Time",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "link": false,
@@ -216,42 +224,41 @@
           "unit": "short"
         }
       ],
-      "targets": [{
-        "alias": "$tag_srcIp",
-        "groupBy": [{
-            "params": [
-              "$__interval"
-            ],
-            "type": "time"
-          },
-          {
-            "params": [
-              "null"
-            ],
-            "type": "fill"
-          }
-        ],
-        "orderByTime": "ASC",
-        "policy": "default",
-        "query": "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
-        "rawQuery": true,
-        "refId": "A",
-        "resultFormat": "time_series",
-        "select": [
-          [{
-              "params": [
-                "value"
-              ],
-              "type": "field"
+      "targets": [
+        {
+          "alias": "$tag_srcIp",
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
             },
             {
-              "params": [],
-              "type": "mean"
+              "params": ["null"],
+              "type": "fill"
             }
-          ]
-        ],
-        "tags": []
-      }],
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query":
+            "SELECT sum(\"currAccPkts\")  - sum(\"prevAccPkts\") FROM \"sonaflow\" WHERE (dstIp = '0.0.0.0/32') AND $timeFilter GROUP BY time(5s), srcIp fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["value"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
       "title": "Ingress Traffic Table View",
       "transform": "timeseries_aggregations",
       "type": "table"
@@ -281,20 +288,10 @@
       "2h",
       "1d"
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
   "title": "Ingress Traffic Stats (Packets)",
   "uid": "xRjZZsKmz",
-  "version": 4
+  "version": 5
 }
